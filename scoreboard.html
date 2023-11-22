@@ -1,0 +1,66 @@
+<div id="scores-container"></div>
+
+<script>
+fetch("https://script.google.com/macros/s/AKfycbxnVesww5OenWTsUN6C7iwICF3aHSnszBkRjV50l-wgr31-ajeof8npw1D19muM7Rpd/exec")
+    .then(response => response.text())
+    .then(result => handleData(result))
+    .catch(error => console.log('error', error));
+
+
+function handleData(data) {
+    var data = JSON.parse(data)
+    const scoresContainer = document.getElementById('scores-container');
+    scoresContainer.innerHTML = '';
+    for (var i in data.scoreboard.games) {
+    const game = data.scoreboard.games[i];
+
+    // Extracting quarterly scores
+    const quarterlyScores = game.homeTeam.periods.map((period, index) => ({
+        quarter: index + 1,
+        homeScore: period.score,
+        awayScore: game.awayTeam.periods[index].score,
+    }));
+
+    const cardTemplate = `
+        <div class="swiper-slide">                   
+
+            <div class="pd4">
+                <div class="card-header">
+                    <h2>${game.gameTimeUTC || 'Not Started'}</h2>
+                </div>
+                <div class="card-body">
+                    <p>${game.awayTeam.teamName} - ${game.awayTeam.score}</p>
+                    <p>${game.homeTeam.teamName} - ${game.homeTeam.score}</p>
+                    <p>Total: ${game.awayTeam.score + game.homeTeam.score}</p>
+
+                    <!-- Bootstrap Table for Quarterly Scores -->
+                    <table class="table table-bordered mt-3">
+                        <thead>
+                            <tr>
+                                <th>Quarter</th>
+                                ${quarterlyScores.map(score => `<th>${score.quarter}</th>`).join('')}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${game.awayTeam.teamName}</td>
+                                ${quarterlyScores.map(score => `<td>${score.awayScore}</td>`).join('')}
+                            </tr>
+                            <tr>
+                                <td>${game.homeTeam.teamName}</td>
+                                ${quarterlyScores.map(score => `<td>${score.homeScore}</td>`).join('')}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    `;
+
+    scoresContainer.innerHTML += cardTemplate;
+}
+
+
+
+}
+</script>
