@@ -1082,7 +1082,7 @@ body {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
-#backdrop {
+.backdrop {
     display: none;
     position: fixed;
     top: 0;
@@ -1261,6 +1261,26 @@ body {
   
 
 
+        /* Add media query for mobile */
+        @media (max-width: 767px) {
+            .info-column,
+            .activity-column {
+                display: none; /* Hide the columns on mobile */
+                right:0px;
+                z-index: 1000;
+                width:90% !important;
+            }
 
-
+            .show-info,
+            .show-activity {
+                display: inline-block; /* Display the buttons inline on mobile */
+                margin: 10px; /* Add some margin for spacing */
+                cursor: pointer;
+                color: #333;
+                text-decoration: underline;
+            }
+            .swiper-slide{
+            	width:110%;
+            }
+        }
 
