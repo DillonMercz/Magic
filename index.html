@@ -353,7 +353,9 @@
             <div class="card-body">
                 <!-- Display performance data, wins/losses, charts, etc. -->
                 <!-- You will insert your performance tracking data here -->
-                <center><h3>Coming Soon!</h3></center>
+                <center>
+                    <h3>Coming Soon!</h3>
+                </center>
             </div>
         </div>
         <!-- Financial Tracking Section -->
@@ -365,7 +367,9 @@
             <div class="card-body">
                 <!-- Display financial data, transactions, profit/loss, etc. -->
                 <!-- You will insert your financial tracking data here -->
-                <center><h3>Coming Soon!</h3></center>
+                <center>
+                    <h3>Coming Soon!</h3>
+                </center>
             </div>
         </div>
         <div class="card col-4 neon-block info-column">
@@ -607,6 +611,8 @@
             const game = data.scoreboard.games[i];
             console.log(game)
             //console.log(game)
+            var winText
+            var loseText
 
             // Extracting quarterly scores
             const quarterlyScores = game.homeTeam.periods.map((period, index) => ({
@@ -664,44 +670,51 @@
     `;
 
             scoresContainer.innerHTML += cardTemplate;
+            if (game.gameStatusText.includes("Final")) {
+                winText = "Win"
+                loseText = "Loss"
+            } else {
+                winText = "Winning"
+                loseText = "Losing"
+            }
 
             try {
 
-            var progress = document.getElementById(`${game.homeTeam.teamCity} ${game.homeTeam.teamName}-progress`);
-            var stats = document.getElementById(`${game.homeTeam.teamCity} ${game.homeTeam.teamName}-stats`);
-            var status = document.getElementById(`${game.homeTeam.teamCity} ${game.homeTeam.teamName}-status`);
-            var statsArray = stats.innerHTML.split(" ");
-            console.log(statsArray)
-            var bet = statsArray[0];
-            var prediction = statsArray[2];
-            console.log(bet, prediction)
+                var progress = document.getElementById(`${game.homeTeam.teamCity} ${game.homeTeam.teamName}-progress`);
+                var stats = document.getElementById(`${game.homeTeam.teamCity} ${game.homeTeam.teamName}-stats`);
+                var status = document.getElementById(`${game.homeTeam.teamCity} ${game.homeTeam.teamName}-status`);
+                var statsArray = stats.innerHTML.split(" ");
+                console.log(statsArray)
+                var bet = statsArray[0];
+                var prediction = statsArray[2];
+                console.log(bet, prediction)
 
-            // Assuming game.awayTeam.score and game.homeTeam.score are available
+                // Assuming game.awayTeam.score and game.homeTeam.score are available
 
-            var totalPoints = game.awayTeam.score + game.homeTeam.score;
+                var totalPoints = game.awayTeam.score + game.homeTeam.score;
 
-            // Assuming you have a variable named 'prediction' with the predicted total points
+                // Assuming you have a variable named 'prediction' with the predicted total points
 
-            // Assuming you want to check if the bet is 'OVER'
-            if (bet === 'OVER' && totalPoints > prediction) {
-                status.innerHTML = '<div style="color:#55fdc4;text-shadow:0 0 0.3em rgba(0, 0, 0, 0.5), 0 0 0.6em lightgreen">Winning</div>';
-            } else if (bet === 'OVER' && totalPoints <= prediction) {
-                status.innerHTML = '<div style="color:red">Losing</div>';
-            } else if (bet === 'UNDER' && totalPoints < prediction) {
-                status.innerHTML = '<div style="color:#55fdc4;text-shadow:0 0 0.3em rgba(0, 0, 0, 0.5), 0 0 0.6em lightgreen">Winning</div>';
-            } else if (bet === 'UNDER' && totalPoints >= prediction) {
-                status.innerHTML = '<div style="color:red">Losing</div>';
-            } else {
-                // Handle any other cases or set a default status
-                status.innerHTML = 'No result';
+                // Assuming you want to check if the bet is 'OVER'
+                if (bet === 'OVER' && totalPoints > prediction) {
+                    status.innerHTML = `<div style="color:#55fdc4;text-shadow:0 0 0.3em rgba(0, 0, 0, 0.5), 0 0 0.6em lightgreen">${winText}</div>`;
+                } else if (bet === 'OVER' && totalPoints <= prediction) {
+                    status.innerHTML = `<div style="color:red">${loseText}</div>`;
+                } else if (bet === 'UNDER' && totalPoints < prediction) {
+                    status.innerHTML = `<div style="color:#55fdc4;text-shadow:0 0 0.3em rgba(0, 0, 0, 0.5), 0 0 0.6em lightgreen">${winText}</div>`;
+                } else if (bet === 'UNDER' && totalPoints >= prediction) {
+                    status.innerHTML = `<div style="color:red">${loseText}</div>`;
+                } else {
+                    // Handle any other cases or set a default status
+                    status.innerHTML = 'No result';
+                }
+
+                // Update progress value
+                progress.value = totalPoints;
+
+            } catch (err) {
+                //do nothing
             }
-
-            // Update progress value
-            progress.value = totalPoints;
-
-        }catch(err){
-            //do nothing
-        }
 
         };
 
@@ -723,23 +736,23 @@
 
     // Poll the API every minute to get the latest scores
     setInterval(getNBAScores, 20000);
-firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-        // User is signed in, fetch the document
-        const userDocRef = firebase.firestore().collection('users').doc(user.email);
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in, fetch the document
+            const userDocRef = firebase.firestore().collection('users').doc(user.email);
 
-        userDocRef.get().then(doc => {
-            if (doc.exists) {
-                const status = doc.data().status;
-                console.log(status)
+            userDocRef.get().then(doc => {
+                if (doc.exists) {
+                    const status = doc.data().status;
+                    console.log(status)
 
-                if (status === "Commoner") {
-                    // Add a blurry element with a lock icon and "Get Premium" button
-                    const aiContainer = document.getElementById('blur');
-                    const blurryElement = document.createElement('div');
-                    blurryElement.style.width="100%"
-                    blurryElement.style.height="300px"
-                    blurryElement.innerHTML = `<center>
+                    if (status === "Commoner") {
+                        // Add a blurry element with a lock icon and "Get Premium" button
+                        const aiContainer = document.getElementById('blur');
+                        const blurryElement = document.createElement('div');
+                        blurryElement.style.width = "100%"
+                        blurryElement.style.height = "300px"
+                        blurryElement.innerHTML = `<center>
                             <img src="https://i.imgur.com/UVbZkf2.png" alt="Lock Icon" height="150px" width="150px"/>
                             <br>
                             <br>
@@ -748,26 +761,26 @@ firebase.auth().onAuthStateChanged(function(user) {
                             <button class="btn btn-primary" onclick="getPremium()">Get Premium</button>
                             </center>
                         `;
-                    aiContainer.appendChild(blurryElement);
-                } else if (status === "Apprentice"){
+                        aiContainer.appendChild(blurryElement);
+                    } else if (status === "Apprentice") {
 
-                    var requestOptions = {
-                        method: 'GET',
-                        redirect: 'follow'
-                    };
+                        var requestOptions = {
+                            method: 'GET',
+                            redirect: 'follow'
+                        };
 
-                    fetch(`https://cryptaverse.xyz/predictions/2023-11-22_predictions.json`, requestOptions)
-                        .then(response => response.text())
-                        .then(result => buildPredictions(JSON.parse(result)))
-                        .catch(error => console.log('error', error));
+                        fetch(`https://cryptaverse.xyz/predictions/2023-11-22_predictions.json`, requestOptions)
+                            .then(response => response.text())
+                            .then(result => buildPredictions(JSON.parse(result)))
+                            .catch(error => console.log('error', error));
+                    }
                 }
-            }
-        }).catch(error => console.log('Error getting user document:', error));
-    } else {
-    // No user is signed in.
-        openModal()
-  }
-});
+            }).catch(error => console.log('Error getting user document:', error));
+        } else {
+            // No user is signed in.
+            openModal()
+        }
+    });
 
     function getPremium() {
         // Handle the logic for upgrading to premium
