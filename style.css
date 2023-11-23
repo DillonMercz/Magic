@@ -993,6 +993,7 @@ body {
     width: 20% !important;
     height: auto;
     top: 22.2%;
+    min-height:212px;
 }
 
 

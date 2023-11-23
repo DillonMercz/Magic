@@ -312,7 +312,7 @@
     </div>
     <div class="container mt-4">
         <center>
-            <h1 class="" style="padding:8.0px;font-family: ModeSeven;">AI NBA Betting Dashboard</h1>
+            <h1 class="" style="padding:2.0px;font-family: ModeSeven;">AI NBA Betting Dashboard (Beta)</h1>
         </center>
         <br>
         <br>
@@ -336,7 +336,7 @@
             <div class="card-header">
                 <h2>AI Predictions</h2>
             </div>
-            <div class="swiper-container">
+            <div class="swiper-container" id="blur">
                 <div class="swiper-wrapper" id="ai-container">
                     <!-- Live scores cards will be dynamically added here -->
                 </div>
@@ -353,6 +353,7 @@
             <div class="card-body">
                 <!-- Display performance data, wins/losses, charts, etc. -->
                 <!-- You will insert your performance tracking data here -->
+                <center><h3>Coming Soon!</h3></center>
             </div>
         </div>
         <!-- Financial Tracking Section -->
@@ -364,6 +365,7 @@
             <div class="card-body">
                 <!-- Display financial data, transactions, profit/loss, etc. -->
                 <!-- You will insert your financial tracking data here -->
+                <center><h3>Coming Soon!</h3></center>
             </div>
         </div>
         <div class="card col-4 neon-block info-column">
@@ -411,10 +413,10 @@
         <form id="loginForm" style="display: none;">
             <h2>Login</h2>
             <div class="user-box">
-                <input type="text" id="loginEmail" name="loginUsername" placeholder="Email"  required>
+                <input type="text" id="loginEmail" name="loginUsername" placeholder="Email" required>
             </div>
             <div class="user-box">
-                <input type="password" id="loginPassword" name="loginPassword"  placeholder="Password"  required>
+                <input type="password" id="loginPassword" name="loginPassword" placeholder="Password" required>
             </div>
             <a href="#" onclick="login()">
                 <span></span>
@@ -427,8 +429,7 @@
         <form id="signupForm" style="">
             <h2>Sign Up</h2>
             <div class="user-box">
-                <input type="text" id="signupEmail" name="signupUsername"  placeholder="Email"  required>
-                
+                <input type="text" id="signupEmail" name="signupUsername" placeholder="Email" required>
             </div>
             <div class="user-box">
                 <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required>
@@ -442,9 +443,13 @@
             </a>
         </form>
         <p>
-            <a class="toggleLink" style="display: none;" data-form="signupForm"><p>New member? Sign up</p></a></p>
-            <p>
-            <a class="toggleLink" data-form="loginForm"><p>Already a member? Log in</p></a>
+            <a class="toggleLink" style="display: none;" data-form="signupForm">
+                <p>New member? Sign up</p>
+            </a></p>
+        <p>
+            <a class="toggleLink" data-form="loginForm">
+                <p>Already a member? Log in</p>
+            </a>
         </p>
     </div>
     <div id="backdrop"></div>
@@ -527,12 +532,12 @@
 
 
     function closeModal() {
-    const modal = document.getElementById('modal');
-    const backdrop = document.getElementById('backdrop');
+        const modal = document.getElementById('modal');
+        const backdrop = document.getElementById('backdrop');
 
-    modal.style.display = 'none';
-    backdrop.style.display = 'none';
-  }
+        modal.style.display = 'none';
+        backdrop.style.display = 'none';
+    }
 
     function login() {
         // Implement Firebase login logic
@@ -551,16 +556,32 @@
             });
     }
 
+
     function signup() {
         // Implement Firebase signup logic
         const email = document.getElementById('signupEmail').value;
         const password = document.getElementById('signupPassword').value;
 
+        // Create user in Firebase Authentication
         firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(user => {
-                // Handle successful signup
-                console.log('Signup successful:', user);
-                closeModal()
+            .then(userCredential => {
+                const user = userCredential.user;
+
+                // Create a document in Firestore with the user's email and status "Apprentice"
+                firebase.firestore().collection('users').doc(user.email).set({
+                        email: user.email,
+                        status: 'Commoner'
+                    })
+                    .then(() => {
+                        // Handle successful signup and Firestore document creation
+                        console.log('Signup successful:', user);
+                        // Close the modal or redirect to another page if needed
+                        closeModal();
+                    })
+                    .catch(error => {
+                        // Handle Firestore document creation error
+                        console.error('Firestore error:', error.message);
+                    });
             })
             .catch(error => {
                 // Handle signup error
@@ -644,6 +665,8 @@
 
             scoresContainer.innerHTML += cardTemplate;
 
+            try {
+
             var progress = document.getElementById(`${game.homeTeam.teamCity} ${game.homeTeam.teamName}-progress`);
             var stats = document.getElementById(`${game.homeTeam.teamCity} ${game.homeTeam.teamName}-stats`);
             var status = document.getElementById(`${game.homeTeam.teamCity} ${game.homeTeam.teamName}-status`);
@@ -676,6 +699,10 @@
             // Update progress value
             progress.value = totalPoints;
 
+        }catch(err){
+            //do nothing
+        }
+
         };
 
         // Initialize Swiper
@@ -696,27 +723,57 @@
 
     // Poll the API every minute to get the latest scores
     setInterval(getNBAScores, 20000);
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        // User is signed in, fetch the document
+        const userDocRef = firebase.firestore().collection('users').doc(user.email);
 
+        userDocRef.get().then(doc => {
+            if (doc.exists) {
+                const status = doc.data().status;
+                console.log(status)
 
-    function parseISO8601Duration(duration) {
-        const regex = /PT(?:(\d+)M)?(?:(\d+)S)?/;
-        const match = duration.match(regex);
+                if (status === "Commoner") {
+                    // Add a blurry element with a lock icon and "Get Premium" button
+                    const aiContainer = document.getElementById('blur');
+                    const blurryElement = document.createElement('div');
+                    blurryElement.style.width="100%"
+                    blurryElement.style.height="300px"
+                    blurryElement.innerHTML = `<center>
+                            <img src="https://i.imgur.com/UVbZkf2.png" alt="Lock Icon" height="150px" width="150px"/>
+                            <br>
+                            <br>
+                            <p style="font-size:14px">YOU NEED ACCESS! GOOD THING ITS ONLY $25/Month!</p>
+                            <br>
+                            <button class="btn btn-primary" onclick="getPremium()">Get Premium</button>
+                            </center>
+                        `;
+                    aiContainer.appendChild(blurryElement);
+                } else if (status === "Apprentice"){
 
-        const minutes = match[1] ? match[1] : '0';
-        const seconds = match[2] ? match[2] : '0';
+                    var requestOptions = {
+                        method: 'GET',
+                        redirect: 'follow'
+                    };
 
-        return `${minutes}:${seconds}`;
+                    fetch(`https://cryptaverse.xyz/predictions/2023-11-22_predictions.json`, requestOptions)
+                        .then(response => response.text())
+                        .then(result => buildPredictions(JSON.parse(result)))
+                        .catch(error => console.log('error', error));
+                }
+            }
+        }).catch(error => console.log('Error getting user document:', error));
+    } else {
+    // No user is signed in.
+        openModal()
+  }
+});
+
+    function getPremium() {
+        // Handle the logic for upgrading to premium
+        console.log('User clicked Get Premium');
     }
 
-    var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-    };
-
-    fetch(`https://cryptaverse.xyz/predictions/${formattedDate}_predictions.json`, requestOptions)
-        .then(response => response.text())
-        .then(result => buildPredictions(JSON.parse(result)))
-        .catch(error => console.log('error', error));
 
 
     function buildPredictions(predictions) {
