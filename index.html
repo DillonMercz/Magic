@@ -322,7 +322,7 @@
             <div class="card-header">
                 <h2>Scoreboard</h2>
             </div>
-            <div class="swiper-container">
+            <div class="swiper-container" id="scores-wrapper">
                 <div class="swiper-wrapper" id="scores-container">
                     <!-- Live scores cards will be dynamically added here -->
                 </div>
@@ -336,7 +336,7 @@
             <div class="card-header">
                 <h2>AI Predictions</h2>
             </div>
-            <div class="swiper-container" id="blur">
+            <div class="swiper-container" id="blur" id="ai-wrapper">
                 <div class="swiper-wrapper" id="ai-container">
                     <!-- Live scores cards will be dynamically added here -->
                 </div>
@@ -803,7 +803,7 @@
         };
 
         // Initialize Swiper
-        const swiper = new Swiper('#scores-container', {
+        const swiper = new Swiper('#scores-wrapper', {
             slidesPerView: 1,
             spaceBetween: 'auto',
             scrollbar: 'hide',
@@ -906,7 +906,7 @@
             aiContainer.innerHTML += cardTemplate;
         }
         // Initialize Swiper
-        const swiper = new Swiper('#ai-container', {
+        const swiper = new Swiper('#ai-wrapper', {
             slidesPerView: 1,
 
             spaceBetween: 'auto',
