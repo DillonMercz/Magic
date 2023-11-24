@@ -336,7 +336,7 @@
             <div class="card-header">
                 <h2>AI Predictions</h2>
             </div>
-            <div class="swiper-container" id="blur" id="ai-wrapper">
+            <div class="swiper-container" class="blur" id="ai-wrapper">
                 <div class="swiper-wrapper" id="ai-container">
                     <!-- Live scores cards will be dynamically added here -->
                 </div>
@@ -833,7 +833,7 @@
 
                     if (status === "Commoner") {
                         // Add a blurry element with a lock icon and "Get Premium" button
-                        const aiContainer = document.getElementById('blur');
+                        const aiContainer = document.querySelector('blur');
                         const blurryElement = document.createElement('div');
                         blurryElement.style.width = "100%"
                         blurryElement.style.height = "300px"
