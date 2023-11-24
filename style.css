@@ -1323,8 +1323,8 @@ body {
     	overflow-x: scroll;
     }
 
-    .swiper-container {
-        touch-action: pan-y;
-        overflow-x: scroll;
-    }
+}
+
+.swiper-container-pointer-events {
+    touch-action: pan-x !important;
 }

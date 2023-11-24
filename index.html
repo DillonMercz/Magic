@@ -336,7 +336,7 @@
             <div class="card-header">
                 <h2>AI Predictions</h2>
             </div>
-            <div class="swiper-container" class="blur" id="ai-wrapper">
+            <div class="swiper-container tag-group my-4 team-swiper-4 swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events" class="blur" id="ai-wrapper">
                 <div class="swiper-wrapper" id="ai-container">
                     <!-- Live scores cards will be dynamically added here -->
                 </div>
@@ -809,12 +809,13 @@
 
         // Initialize Swiper
         const swiper = new Swiper('#scores-wrapper', {
-            slidesPerView: 1,
-            spaceBetween: 'auto',
-            scrollbar: 'hide',
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
+           slidesPerView: 'auto',
+                freeMode: true,
+                spaceBetween: 16,
+                touchRatio: 1,
+                scrollbar: {
+                    el: '.swiper-scrollbar',
+                    hide: false,
             },
         });
     }
@@ -913,12 +914,12 @@
         // Initialize Swiper
         const swiper = new Swiper('#ai-wrapper', {
             slidesPerView: 'auto',
-            freeMode: true,
-            spaceBetween: 16,
-            touchRatio: 1,
-            scrollbar: {
-                el: '.swiper-scrollbar',
-                hide: false,
+                freeMode: true,
+                spaceBetween: 16,
+                touchRatio: 1,
+                scrollbar: {
+                    el: '.swiper-scrollbar',
+                    hide: false,
             },
         });
     }
