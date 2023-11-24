@@ -886,7 +886,7 @@
             const game = predictions[i]
             console.log(predictions[i].under_over, predictions[i].total, predictions[i].away_team, predictions[i].home_team, predictions[i].expected_value_colors.home_color)
             const cardTemplate = `
-        <div class="swiper-slide swiper-slide-next">                    
+        <div class="swiper-slide">                    
                      
 
             <div class="pd4">
@@ -910,16 +910,15 @@
         }
         $('*').bind('touchmove', false);
         // Initialize Swiper
-         new Swiper("#ai-container", {
-                    slidesPerView: 'auto',
-                    freeMode: true,
-                    spaceBetween: 16,
-                    touchRatio: 1,
-                    scrollbar: {
-                        el: '.swiper-scrollbar',
-                        hide: false,
-                    },
-                });
+        const swiper = new Swiper('#ai-container', {
+            slidesPerView: 1,
+
+            spaceBetween: 'auto',
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
     }
     </script>
 </body>
