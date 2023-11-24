@@ -613,7 +613,18 @@
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(userCredential => {
                 const user = userCredential.user;
-                setUser(user)
+                try {
+                    firebase.firestore().collection('users').doc(user.email).set({
+                        email: user.email,
+                        status: 'Commoner'
+                    });
+
+                    console.log('Signup successful:', user);
+                    closeModal();
+                    window.location.reload();
+                } catch (error) {
+                    console.error('Firestore error:', error.message);
+                }
             })
             .catch(error => {
                 // Handle signup error
