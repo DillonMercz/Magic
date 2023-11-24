@@ -473,8 +473,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-
-
     function toggleVisibility(className) {
         var element = document.querySelector('.' + className);
         if (element.style.display === 'none' || element.style.display === '') {
@@ -498,24 +496,24 @@
 
 
     // Initialize Firebase with your configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyA2jqbSIcDferczQaDUJNffEydFto4KMVE",
-    authDomain: "wizard-plays.firebaseapp.com",
-    projectId: "wizard-plays",
-    storageBucket: "wizard-plays.appspot.com",
-    messagingSenderId: "1074457433330",
-    appId: "1:1074457433330:web:b16d4653346147c72b2c6b",
-    measurementId: "G-37X3M023HX"
-};
+    const firebaseConfig = {
+        apiKey: "AIzaSyA2jqbSIcDferczQaDUJNffEydFto4KMVE",
+        authDomain: "wizard-plays.firebaseapp.com",
+        projectId: "wizard-plays",
+        storageBucket: "wizard-plays.appspot.com",
+        messagingSenderId: "1074457433330",
+        appId: "1:1074457433330:web:b16d4653346147c72b2c6b",
+        measurementId: "G-37X3M023HX"
+    };
 
-firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
 
-// Check authentication state
-firebase.auth().onAuthStateChanged(user => {
-    if (!user) {
-        openModal();
-    }
-});
+    // Check authentication state
+    firebase.auth().onAuthStateChanged(user => {
+        if (!user) {
+            openModal();
+        }
+    });
 
     function openModal() {
         const modal = document.getElementById('modal');
@@ -596,20 +594,27 @@ firebase.auth().onAuthStateChanged(user => {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(function(userCredential) {
                 const user = userCredential.user;
-                document.write(user)
-                    firebase.firestore().collection('users').doc(user.email).set({
+                console.log('User:', user); // Log user information to the console for debugging
+
+                firebase.firestore().collection('users').doc(user.email).set({
                         email: user.email,
                         status: 'Commoner'
+                    })
+                    .then(() => {
+                        console.log('User document added successfully.'); // Log success message to the console
+                        closeModal();
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        // Handle Firestore document creation error
+                        console.error('Firestore error:', error.message);
                     });
-
-                    console.log('Signup successful:', user);
-                    closeModal();
-                    window.location.reload();
             })
             .catch(error => {
                 // Handle signup error
                 console.error('Signup error:', error.message);
             });
+
     }
 
 
