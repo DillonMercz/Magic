@@ -310,10 +310,15 @@ body {
     /* Adjust the width as needed */
     margin: auto;
     /* Center the swiper container */
-    overflow: scroll;
+    overflow-x: scroll;
     /* Hide overflow */
-}
+    touch-action: pan-x !important;
 
+}
+.swiper-container-pointer-events {
+    touch-action: pan-x !important;
+    overflow-x: scroll;
+}
 td {
     color: white;
 }
@@ -1068,7 +1073,7 @@ body {
     margin-left: 0.5em;
 }
 
-#modal {
+.modal {
     display: none;
     position: fixed;
     top: 50%;
