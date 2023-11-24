@@ -8,7 +8,7 @@
     <title>Sports Betting Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="./style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 
 <body>
@@ -322,7 +322,7 @@
             <div class="card-header">
                 <h2>Scoreboard</h2>
             </div>
-            <div class="swiper-container tag-group my-4 team-swiper-4 swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
+            <div class="swiper-container">
                 <div class="swiper-wrapper" id="scores-container">
                     <!-- Live scores cards will be dynamically added here -->
                 </div>
@@ -336,7 +336,7 @@
             <div class="card-header">
                 <h2>AI Predictions</h2>
             </div>
-            <div class="swiper-container tag-group my-4 team-swiper-4 swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events" id="blur">
+            <div class="swiper-container" id="blur">
                 <div class="swiper-wrapper" id="ai-container">
                     <!-- Live scores cards will be dynamically added here -->
                 </div>
@@ -814,7 +814,6 @@
                 clickable: true,
             },
         });
-       swiper.allowTouchMove= true
     }
 
 
