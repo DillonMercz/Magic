@@ -607,7 +607,6 @@
         // Implement Firebase signup logic
         const email = document.getElementById('signupEmail').value;
         const password = document.getElementById('signupPassword').value;
-        closeModal();
 
         // Create user in Firebase Authentication
         firebase.auth().createUserWithEmailAndPassword(email, password)
