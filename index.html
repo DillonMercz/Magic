@@ -590,32 +590,19 @@ function signup() {
     const email = document.getElementById('signupEmail').value;
     const password = document.getElementById('signupPassword').value;
 
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            // User signed in successfully
-            const user = userCredential.user;
-            console.log('User:', user);
-
-            // Add user document to Firestore
-            firebase.firestore().collection('users').doc(user.email).set({
-                email: user.email,
-                status: 'Commoner'
-            })
-            .then(() => {
-                console.log('User document added successfully.');
-                closeModal();
-                window.location.reload();
-            })
-            .catch(error => {
-                console.error('Firestore error:', error.message);
-            });
-        })
-        .catch((error) => {
-            // Handle signup error
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.error('Signup error:', errorCode, errorMessage);
-        });
+     firebase.auth().createUserWithEmailAndPassword(email, password)
+                    .then(function(userCredential) {
+                        // User created successfully
+                        var user = userCredential.user;
+                        // Updating the displayName with the username input
+                        document.write(user.email)
+                    })
+                    .catch(function(error) {
+                        // Error occurred during signup
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        document.write(errorCode, errorMessage);
+                    });
 }
 
 
