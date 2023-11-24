@@ -586,37 +586,36 @@
     }
 
 
-    function signup() {
-        // Implement Firebase signup logic
-        const email = document.getElementById('signupEmail').value;
-        const password = document.getElementById('signupPassword').value;
+   function signup() {
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
 
-        // Create user in Firebase Authentication
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(function(userCredential) {
-                const user = userCredential.user;
-                console.log('User:', user); // Log user information to the console for debugging
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(userCredential => {
+            const user = userCredential.user;
+            console.log('User:', user);
 
-                firebase.firestore().collection('users').doc(user.email).set({
-                        email: user.email,
-                        status: 'Commoner'
-                    })
-                    .then(() => {
-                        console.log('User document added successfully.'); // Log success message to the console
-                        closeModal();
-                        window.location.reload();
-                    })
-                    .catch(error => {
-                        // Handle Firestore document creation error
-                        console.error('Firestore error:', error.message);
-                    });
+            const userDocRef = firebase.firestore().collection('users').doc(user.email);
+
+            // Set user document in Firestore
+            userDocRef.set({
+                email: user.email,
+                status: 'Commoner'
+            })
+            .then(() => {
+                console.log('User document added successfully.');
+                closeModal();
+                window.location.reload();
             })
             .catch(error => {
-                // Handle signup error
-                console.error('Signup error:', error.message);
+                console.error('Firestore error:', error.message);
             });
+        })
+        .catch(error => {
+            console.error('Signup error:', error.message);
+        });
+}
 
-    }
 
 
     function getNBAScores() {
