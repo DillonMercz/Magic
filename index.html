@@ -456,10 +456,12 @@
             </a>
         </p>
     </div>
-    <button class="show-info" onclick="toggleVisibility('info-column')"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></button>
-    <button class="show-activity" onclick="toggleVisibility('activity-column')"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></button>
-
-
+    <button class="show-info" onclick="toggleVisibility('info-column')"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" /></svg></button>
+    <button class="show-activity" onclick="toggleVisibility('activity-column')"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" /></svg></button>
     <div id="backdrop" class="backdrop"></div>
     <div id="backdrop1" class="backdrop" onclick="closeAll()"></div>
     <!-- Include Firebase SDK script -->
@@ -471,7 +473,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-        const database = firebase.firestore();
+    const database = firebase.firestore();
+
     function toggleVisibility(className) {
         var element = document.querySelector('.' + className);
         if (element.style.display === 'none' || element.style.display === '') {
@@ -507,25 +510,21 @@
 
     firebase.initializeApp(firebaseConfig);
 
-    function setStatus(user){
-        console.log(user)
-        // Create a document in Firestore with the user's email and status "Apprentice"
-                firebase.firestore().collection('users').doc(user.email).set({
-                        email: user.email,
-                        status: 'Commoner'
-                    })
-                    .then(() => {
-                        // Handle successful signup and Firestore document creation
-                        console.log('Signup successful:', user);
-                        // Close the modal or redirect to another page if needed
-                        closeModal();
-                        window.location.reload()
-                    })
-                    .catch(error => {
-                        // Handle Firestore document creation error
-                        console.error('Firestore error:', error.message);
-                    });
+    async function setStatus(user) {
+        try {
+            await firebase.firestore().collection('users').doc(user.email).set({
+                email: user.email,
+                status: 'Commoner'
+            });
+
+            console.log('Signup successful:', user);
+            closeModal();
+            window.location.reload();
+        } catch (error) {
+            console.error('Firestore error:', error.message);
+        }
     }
+
 
     // Check authentication state
     firebase.auth().onAuthStateChanged(user => {
