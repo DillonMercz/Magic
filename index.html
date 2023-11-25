@@ -860,7 +860,7 @@
                             redirect: 'follow'
                         };
 
-                        fetch(`https://cryptaverse.xyz/predictions/2023-11-24_predictions.json`, requestOptions)
+                        fetch(`https://cryptaverse.xyz/predictions/2023-11-25_predictions.json`, requestOptions)
                             .then(response => response.text())
                             .then(result => buildPredictions(JSON.parse(result)))
                             .catch(error => console.log('error', error));
