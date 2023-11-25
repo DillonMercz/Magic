@@ -552,9 +552,10 @@
     }
     </script>
     <script>
-    const currentDate = new Date();
-    const formattedDate = currentDate.toISOString().split('T')[0];
-    console.log(formattedDate)
+const currentDate = new Date();
+const options = { timeZone: 'America/New_York' };
+const formattedDate = currentDate.toLocaleDateString('en-US', options).replace(/\//g, '-');
+console.log(formattedDate);
 
 
     // Initialize Firebase with your configuration
@@ -860,7 +861,7 @@
                             redirect: 'follow'
                         };
 
-                        fetch(`https://cryptaverse.xyz/predictions/2023-11-25_predictions.json`, requestOptions)
+                        fetch(`https://cryptaverse.xyz/predictions/${formattedDate.}_predictions.json`, requestOptions)
                             .then(response => response.text())
                             .then(result => buildPredictions(JSON.parse(result)))
                             .catch(error => console.log('error', error));
