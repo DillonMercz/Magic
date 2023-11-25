@@ -554,8 +554,12 @@
     <script>
 const currentDate = new Date();
 const options = { timeZone: 'America/New_York' };
-const formattedDate = currentDate.toLocaleDateString('en-US', options).replace(/\//g, '-');
+const [month, day, year] = currentDate.toLocaleDateString('en-US', options)
+  .split('/')
+  .map((part) => part.padStart(2, '0'));
+const formattedDate = `${year}-${month}-${day}`;
 console.log(formattedDate);
+
 
 
     // Initialize Firebase with your configuration
@@ -810,13 +814,13 @@ console.log(formattedDate);
 
         // Initialize Swiper
         const swiper = new Swiper('#scores-wrapper', {
-           slidesPerView: 'auto',
-                freeMode: true,
-                spaceBetween: 16,
-                touchRatio: 1,
-                scrollbar: {
-                    el: '.swiper-scrollbar',
-                    hide: false,
+            slidesPerView: 'auto',
+            freeMode: true,
+            spaceBetween: 16,
+            touchRatio: 1,
+            scrollbar: {
+                el: '.swiper-scrollbar',
+                hide: false,
             },
         });
     }
@@ -915,12 +919,12 @@ console.log(formattedDate);
         // Initialize Swiper
         const swiper = new Swiper('#ai-wrapper', {
             slidesPerView: 'auto',
-                freeMode: true,
-                spaceBetween: 16,
-                touchRatio: 1,
-                scrollbar: {
-                    el: '.swiper-scrollbar',
-                    hide: false,
+            freeMode: true,
+            spaceBetween: 16,
+            touchRatio: 1,
+            scrollbar: {
+                el: '.swiper-scrollbar',
+                hide: false,
             },
         });
     }
