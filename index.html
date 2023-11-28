@@ -894,7 +894,7 @@
             const game = predictions[i]
             if (game.under_over === "UNDER") {
                 game.total = game.total += 5
-            } else if (gameData.under_over === "OVER") {
+            } else if (game.under_over === "OVER") {
                 game.total = game.total -= 5
             }
             const cardTemplate = `
