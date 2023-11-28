@@ -26,113 +26,6 @@ fetch(`https://cryptaverse.xyz/predictions/${formattedDate}_predictions.json`, r
     .catch(error => console.log('error', error));
 
 function buildParlays(data) {
-    data = [
-  {
-    "home_team": "Cleveland Cavaliers",
-    "away_team": "Atlanta Hawks",
-    "winner": 1,
-    "under_over": "OVER",
-    "winner_confidence": 64.5,
-    "un_confidence": 91.0,
-    "total": 228,
-    "expected_value_colors": {
-      "home_color": "GREEN",
-      "away_color": "RED"
-    }
-  },
-  {
-    "home_team": "Miami Heat",
-    "away_team": "Milwaukee Bucks",
-    "winner": 1,
-    "under_over": "UNDER",
-    "winner_confidence": 64.5,
-    "un_confidence": 96.0,
-    "total": 237.5,
-    "expected_value_colors": {
-      "home_color": "GREEN",
-      "away_color": "RED"
-    }
-  },
-  {
-    "home_team": "New York Knicks",
-    "away_team": "Charlotte Hornets",
-    "winner": 1,
-    "under_over": "OVER",
-    "winner_confidence": 64.5,
-    "un_confidence": 88.9,
-    "total": 222.5,
-    "expected_value_colors": {
-      "home_color": "GREEN",
-      "away_color": "RED"
-    }
-  },
-  {
-    "home_team": "Boston Celtics",
-    "away_team": "Chicago Bulls",
-    "winner": 1,
-    "under_over": "OVER",
-    "winner_confidence": 64.5,
-    "un_confidence": 51.7,
-    "total": 220.5,
-    "expected_value_colors": {
-      "home_color": "RED",
-      "away_color": "GREEN"
-    }
-  },
-  {
-    "home_team": "Brooklyn Nets",
-    "away_team": "Toronto Raptors",
-    "winner": 1,
-    "under_over": "OVER",
-    "winner_confidence": 64.5,
-    "un_confidence": 91.6,
-    "total": 219.5,
-    "expected_value_colors": {
-      "home_color": "RED",
-      "away_color": "GREEN"
-    }
-  },
-  {
-    "home_team": "Minnesota Timberwolves",
-    "away_team": "Oklahoma City Thunder",
-    "winner": 1,
-    "under_over": "UNDER",
-    "winner_confidence": 64.5,
-    "un_confidence": 69.7,
-    "total": 229,
-    "expected_value_colors": {
-      "home_color": "GREEN",
-      "away_color": "RED"
-    }
-  },
-  {
-    "home_team": "Dallas Mavericks",
-    "away_team": "Houston Rockets",
-    "winner": 1,
-    "under_over": "OVER",
-    "winner_confidence": 64.5,
-    "un_confidence": 70.4,
-    "total": 228.5,
-    "expected_value_colors": {
-      "home_color": "GREEN",
-      "away_color": "RED"
-    }
-  },
-  {
-    "home_team": "Sacramento Kings",
-    "away_team": "Golden State Warriors",
-    "winner": 1,
-    "under_over": "OVER",
-    "winner_confidence": 64.5,
-    "un_confidence": 77.7,
-    "total": 236,
-    "expected_value_colors": {
-      "home_color": "GREEN",
-      "away_color": "RED"
-    }
-  }
-]
-
   const numGames = data.length;
   const parlays = [];
 
@@ -165,15 +58,16 @@ function buildUI(parlays) {
         //console.log(parlay)
         for (gameIndex in parlay) {
             var gameData = parlay[gameIndex];
+            var total1 = gameData.total
             if(gameData.under_over === "UNDER"){
-                gameData.total = gameData.total += 5
+                total1 = total1 +=5
             }
             else if(gameData.under_over === "OVER"){
-                gameData.total = gameData.total -=5
+                total1 = total1 -=5
             }
             parlayCard = parlayCard + `
                 <div class="card-body">
-                    <h3 id="${gameData.home_team}-stats">${gameData.under_over} ${gameData.total}</h3>
+                    <h3 id="${gameData.home_team}-stats">${gameData.under_over} ${total1}</h3>
                     <p style="display:inline; color:${gameData.expected_value_colors.away_color} !important">${gameData.away_team}</p> <p style="display:inline;">vs</p> <p style="display:inline; color:${gameData.expected_value_colors.home_color} !important">${gameData.home_team}</p>
                     <br>
                 </div>
