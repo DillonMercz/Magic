@@ -26,111 +26,124 @@ fetch(`https://cryptaverse.xyz/predictions/${formattedDate}_predictions.json`, r
     .catch(error => console.log('error', error));
 
 function buildParlays(data) {
-    data= [
-  {
-    "home_team": "New York Knicks",
-    "away_team": "Charlotte Hornets",
-    "winner": 1,
-    "under_over": "OVER",
-    "winner_confidence": 64.5,
-    "un_confidence": 88.9,
-    "total": 219,
-    "expected_value_colors": {
-      "home_color": "RED",
-      "away_color": "GREEN"
+    data = [
+    {
+        "home_team": "Cleveland Cavaliers",
+        "away_team": "Portland Trail Blazers",
+        "winner": 1,
+        "under_over": "OVER",
+        "winner_confidence": 72.7,
+        "un_confidence": 57.1,
+        "total": 218.5,
+        "expected_value_colors": {
+            "home_color": "RED",
+            "away_color": "GREEN"
+        }
+    },
+    {
+        "home_team": "New York Knicks",
+        "away_team": "Detroit Pistons",
+        "winner": 1,
+        "under_over": "OVER",
+        "winner_confidence": 83.7,
+        "un_confidence": 68.4,
+        "total": 219.5,
+        "expected_value_colors": {
+            "home_color": "RED",
+            "away_color": "GREEN"
+        }
+    },
+    {
+        "home_team": "Brooklyn Nets",
+        "away_team": "Charlotte Hornets",
+        "winner": 1,
+        "under_over": "OVER",
+        "winner_confidence": 73.1,
+        "un_confidence": 77.1,
+        "total": 222.5,
+        "expected_value_colors": {
+            "home_color": "RED",
+            "away_color": "GREEN"
+        }
+    },
+    {
+        "home_team": "Miami Heat",
+        "away_team": "Indiana Pacers",
+        "winner": 1,
+        "under_over": "UNDER",
+        "winner_confidence": 57.7,
+        "un_confidence": 55.5,
+        "total": 239,
+        "expected_value_colors": {
+            "home_color": "RED",
+            "away_color": "GREEN"
+        }
+    },
+    {
+        "home_team": "Chicago Bulls",
+        "away_team": "Milwaukee Bucks",
+        "winner": 0,
+        "under_over": "UNDER",
+        "winner_confidence": 63.3,
+        "un_confidence": 95.6,
+        "total": 227,
+        "expected_value_colors": {
+            "home_color": "GREEN",
+            "away_color": "RED"
+        }
+    },
+    {
+        "home_team": "Minnesota Timberwolves",
+        "away_team": "Utah Jazz",
+        "winner": 1,
+        "under_over": "OVER",
+        "winner_confidence": 83.8,
+        "un_confidence": 85.6,
+        "total": 221,
+        "expected_value_colors": {
+            "home_color": "RED",
+            "away_color": "RED"
+        }
+    },
+    {
+        "home_team": "Oklahoma City Thunder",
+        "away_team": "Los Angeles Lakers",
+        "winner": 1,
+        "under_over": "UNDER",
+        "winner_confidence": 73.0,
+        "un_confidence": 83.7,
+        "total": 233,
+        "expected_value_colors": {
+            "home_color": "GREEN",
+            "away_color": "RED"
+        }
+    },
+    {
+        "home_team": "San Antonio Spurs",
+        "away_team": "Atlanta Hawks",
+        "winner": 0,
+        "under_over": "UNDER",
+        "winner_confidence": 61.2,
+        "un_confidence": 63.7,
+        "total": 248,
+        "expected_value_colors": {
+            "home_color": "GREEN",
+            "away_color": "RED"
+        }
+    },
+    {
+        "home_team": "Golden State Warriors",
+        "away_team": "LA Clippers",
+        "winner": 1,
+        "under_over": "UNDER",
+        "winner_confidence": 53.5,
+        "un_confidence": 61.3,
+        "total": 227,
+        "expected_value_colors": {
+            "home_color": "RED",
+            "away_color": "RED"
+        }
     }
-  },
-  {
-    "home_team": "Brooklyn Nets",
-    "away_team": "Toronto Raptors",
-    "winner": 1,
-    "under_over": "OVER",
-    "winner_confidence": 64.5,
-    "un_confidence": 92.4,
-    "total": 220,
-    "expected_value_colors": {
-      "home_color": "RED",
-      "away_color": "GREEN"
-    }
-  },
-  {
-    "home_team": "Cleveland Cavaliers",
-    "away_team": "Atlanta Hawks",
-    "winner": 1,
-    "under_over": "OVER",
-    "winner_confidence": 64.5,
-    "un_confidence": 87.3,
-    "total": 223.5,
-    "expected_value_colors": {
-      "home_color": "GREEN",
-      "away_color": "RED"
-    }
-  },
-  {
-    "home_team": "Miami Heat",
-    "away_team": "Milwaukee Bucks",
-    "winner": 1,
-    "under_over": "UNDER",
-    "winner_confidence": 64.5,
-    "un_confidence": 94.2,
-    "total": 238.5,
-    "expected_value_colors": {
-      "home_color": "GREEN",
-      "away_color": "RED"
-    }
-  },
-  {
-    "home_team": "Boston Celtics",
-    "away_team": "Chicago Bulls",
-    "winner": 1,
-    "under_over": "UNDER",
-    "winner_confidence": 64.5,
-    "un_confidence": 53.0,
-    "total": 230.5,
-    "expected_value_colors": {
-      "home_color": "GREEN",
-      "away_color": "RED"
-    }
-  },
-  {
-    "home_team": "Minnesota Timberwolves",
-    "away_team": "Oklahoma City Thunder",
-    "winner": 1,
-    "under_over": "UNDER",
-    "winner_confidence": 64.5,
-    "un_confidence": 69.5,
-    "total": 228.5,
-    "expected_value_colors": {
-      "home_color": "GREEN",
-      "away_color": "RED"
-    }
-  },
-  {
-    "home_team": "Dallas Mavericks",
-    "away_team": "Houston Rockets",
-    "winner": 1,
-    "under_over": "OVER",
-    "winner_confidence": 64.5,
-    "un_confidence": 71.8,
-    "total": 227.5,
-    "expected_value_colors": {
-      "home_color": "RED",
-      "away_color": "RED"
-    }
-  },
-  {
-    "home_team": "Sacramento Kings",
-    "away_team": "Golden State Warriors",
-    "winner": 1,
-    "under_over": "OVER",
-    "winner_confidence": 64.5,
-    "un_confidence": 58.8,
-    "total": 237,
-    "expected_value_colors": {
-      "home_color": "GREEN",
-      "away_color": "RED"
-    }
-  }
 ]
   const numGames = data.length;
   const parlays = [];
@@ -164,7 +177,7 @@ function buildUI(parlays) {
 
         for (gameIndex in parlay) {
             var gameData = parlay[gameIndex];
-            if (gameData.away_team.includes('Hornets') || gameData.away_team.includes('Bucks')){
+            if (gameData.away_team.includes('Hornets') || gameData.away_team.includes('Bucks') || gameData.away_team.includes('Raptors') || gameData.away_team.includes('Hawks')){
                 isLoser = true;
                 break; // If any game includes one of the specified teams, mark the entire parlay as a loser
             }
