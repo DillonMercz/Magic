@@ -1043,6 +1043,12 @@ body {
 .bar {
     -webkit-appearance: none;
     height: 1.4em;
+    width: 300px;
+    margin-top: 15px;
+}
+.bar1 {
+    -webkit-appearance: none;
+    height: 1.4em;
     width: 100%;
     margin-top: 15px;
 }
