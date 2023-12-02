@@ -390,6 +390,7 @@
             <div class="card-header">
                 <center>
                     <h2>Extra Info</h2>
+                    <hr>
                 </center>
             </div>
             <div class="card-body neon-cards">
@@ -420,9 +421,10 @@
             <div class="card-header">
                 <center>
                     <h2>Activity</h2>
+                    <hr>
                 </center>
             </div>
-            <div class="card-body">
+            <div class="card-body" id="activity">
             </div>
         </div>
     </div>
@@ -571,7 +573,72 @@
         .split('/')
         .map((part) => part.padStart(2, '0'));
     const formattedDate = `${year}-${month}-${day}`;
-    console.log(formattedDate);
+    //console.log(formattedDate);
+function fetchData(date, callback) {
+    const url = `https://cryptaverse.xyz/predictions/${date}_predictions.json`;
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            callback(date, data);
+        })
+        .catch(error => {
+            console.error(`Error fetching data for date ${date}: ${error.message}`);
+            callback(date, null);
+        });
+}
+
+const pastData = [];
+
+function processDate(i) {
+    var activityColoumn = document.getElementById("activity")
+    const previousDate = new Date(currentDate);
+    previousDate.setDate(previousDate.getDate() - i);
+
+    const [month, day, year] = previousDate.toLocaleDateString('en-US', options)
+        .split('/')
+        .map((part) => part.padStart(2, '0'));
+
+    const formattedDate1 = `${year}-${month}-${day}`;
+    
+    fetchData(formattedDate1, (date, data) => {
+        if (data) {
+            for(var i in data){
+                console.log(data[i])
+                var activityCard = activityColoumn.innerHTML += `
+            <div class="pd4">
+                <div class="card-body">
+                <h3 id="${data[i].home_team}-stats">${data[i].under_over}  ${data[i].total}</h3>
+                    <p style="display:inline; color:${data[i].expected_value_colors.away_color} !important">${data[i].away_team}</p> <p style="display:inline;">vs </p> <p style="display:inline; color:${data[i].expected_value_colors.home_color} !important">${data[i].home_team}</p>
+                    <br>
+                    <div class="neon-bar">
+                      <progress id="${data[i].home_team}-progress" class='bar' value='0' max='400'></progress>
+                      <div id="${data[i].home_team}-status" class='bar__value'></div>
+                    </div>
+                    
+                   
+
+                </div>
+            </div>
+            <br>
+            `
+            }
+            activityColoumn.innerHTML = activityCard
+        }
+
+    });
+}
+
+for (let i = 1; i < 6; i++) {
+    processDate(i);
+}
+
+
+
 
 
 
@@ -973,7 +1040,7 @@
 
 
 function buildUI(parlays) {
-    console.log(parlays)
+    //console.log(parlays)
     var cardsHTML = "";
     var winners = []
     var losers = []
@@ -991,7 +1058,7 @@ function buildUI(parlays) {
         }
 
         if (isLoser) {
-            console.log("found a loser")
+            //console.log("found a loser")
             losers.push(parlay);
         } else {
             winners.push(parlay);
@@ -1042,11 +1109,16 @@ function buildUI(parlays) {
 
     var cards = document.getElementById("cards");
     cards.innerHTML = cards.innerHTML + cardsHTML;
-    console.log("winners", winners)
-    console.log("losers", losers)
+    //console.log("winners", winners)
+    //console.log("losers", losers)
 }
 
+
+
+
     </script>
+
+
 </body>
 
 </html>
