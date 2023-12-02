@@ -483,7 +483,7 @@
         <br>
         <div class="" style="background:black;padding:40px">
             <center>
-                <div id="paypal-button-container"></div>
+                <div id="paypal-button-container-P-38H92154VD583351GMVVXQTY"></div>
                 <button class="btn btn-danger" onclick="closePaymentModal()">I'd Rather Be Broke</button>
             </center>
         </div>
@@ -504,29 +504,35 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=AZNQnJmY8fANcRCkafTHqP41ZhXTYVjO4-jkWADiA4rVkSUo4y7XNPPJct5m-yOyDc-gsv6itgqVwZY1&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
-    <script>
+<script src="https://www.paypal.com/sdk/js?client-id=AZNQnJmY8fANcRCkafTHqP41ZhXTYVjO4-jkWADiA4rVkSUo4y7XNPPJct5m-yOyDc-gsv6itgqVwZY1&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+<script>
     var user
-    paypal.Buttons({
-        style: {
-            shape: 'rect',
-            color: 'gold',
-            layout: 'vertical',
-            label: 'subscribe'
-        },
-        createSubscription: function(data, actions) {
-            return actions.subscription.create({
-                /* Creates the subscription */
-                plan_id: 'P-87Y32084LE8702242MVQIRLA'
-            });
-        },
-        onApprove: function(data, actions) {
-            // Update Firestore document with status 'Apprentice'
-            updateFirestoreStatus(user.email, 'Apprentice');
-
-        }
-    }).render('#paypal-button-container'); // Renders the PayPal button
-
+  paypal.Buttons({
+      style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'subscribe'
+      },
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          /* Creates the subscription */
+          plan_id: 'P-38H92154VD583351GMVVXQTY'
+        });
+      },
+      onApprove: function(data, actions) {
+        alert(data.subscriptionID); // You can add optional success message for the subscriber here
+                        // Add user document to Firestore
+        firebase.firestore().collection('users').doc(user.email).set({
+                email: user.email,
+                status: 'Apprentice'
+            })
+            .then(() => {
+                console.log('User document added successfully.');
+                window.location.reload();
+            })
+      }
+  }).render('#paypal-button-container-P-38H92154VD583351GMVVXQTY'); // Renders the PayPal button
     // Function to update Firestore document status
     function updateFirestoreStatus(email, status) {
         firebase.firestore().collection('users').doc(email).update({
@@ -932,7 +938,7 @@ for (let i = 1; i < 6; i++) {
                             <img src="https://i.imgur.com/UVbZkf2.png" alt="Lock Icon" height="150px" width="150px"/>
                             <br>
                             <br>
-                            <p style="font-size:14px">YOU NEED ACCESS! GOOD THING ITS ONLY $75/Month!</p>
+                            <p style="font-size:14px">YOU NEED ACCESS! GOOD THING ITS FREE FOR 3 DAYS!</p>
                             <br>
                             <button class="btn btn-primary" onclick="getPremium()">Get Premium</button>
                             </center>
