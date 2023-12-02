@@ -344,6 +344,19 @@
                 <div class="swiper-pagination"></div>
             </div>
         </div>
+        <div class="card mb-4 neon-block">
+            <span class="rainbow"></span>
+            <div class="card-header">
+                <h2>Parlays</h2>
+            </div>
+            <div class="swiper-container tag-group my-4 team-swiper-4 swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events blur" id="cards-wrapper">
+                <div class="swiper-wrapper" id="cards">
+                    <!-- Live scores cards will be dynamically added here -->
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
         <!-- Performance Tracking Section -->
         <div class="card mb-4 neon-block">
             <span class="rainbow"></span>
@@ -888,6 +901,7 @@
 
 
     function buildPredictions(predictions) {
+        buildParlays(predictions)
         const aiContainer = document.getElementById('ai-container');
         aiContainer.innerHTML = '';
         for (var i in predictions) {
@@ -932,6 +946,106 @@
             },
         });
     }
+
+
+
+
+
+    function buildParlays(data) {
+  const numGames = data.length;
+  const parlays = [];
+
+  // Iterate through games for the first leg
+  for (let i = 0; i < numGames - 2; i++) {
+    // Iterate through games for the second leg
+    for (let j = i + 1; j < numGames - 1; j++) {
+      // Iterate through games for the third leg
+      for (let k = j + 1; k < numGames; k++) {
+        // Build the parlay array and push it to the parlays array
+        parlays.push([data[i], data[j], data[k]]);
+      }
+    }
+  }
+
+  //console.log(parlays);
+  buildUI(parlays)
+}
+
+
+function buildUI(parlays) {
+    console.log(parlays)
+    var cardsHTML = "";
+    var winners = []
+    var losers = []
+
+    for (parlayIndex in parlays) {
+        var parlay = parlays[parlayIndex];
+           var isLoser = false;
+
+        for (gameIndex in parlay) {
+            var gameData = parlay[gameIndex];
+            if (gameData.away_team.includes('Hornets') || gameData.away_team.includes('Bucks') || gameData.away_team.includes('Raptors') || gameData.away_team.includes('Hawks')){
+                isLoser = true;
+                break; // If any game includes one of the specified teams, mark the entire parlay as a loser
+            }
+        }
+
+        if (isLoser) {
+            console.log("found a loser")
+            losers.push(parlay);
+        } else {
+            winners.push(parlay);
+        }
+
+        var parlayCard = "";
+        //console.log(parlay)
+        for (gameIndex in parlay) {
+            var gameData = parlay[gameIndex];
+            var total1 = gameData.total
+            if(gameData.under_over === "UNDER"){
+                total1 = total1 +=5
+            }
+            else if(gameData.under_over === "OVER"){
+                total1 = total1 -=5
+            }
+            parlayCard = parlayCard + `
+                <div class="card-body">
+                    <h3 id="${gameData.home_team}-stats">${gameData.under_over} ${total1}</h3>
+                    <p style="display:inline; color:${gameData.expected_value_colors.away_color} !important">${gameData.away_team}</p> <p style="display:inline;">vs</p> <p style="display:inline; color:${gameData.expected_value_colors.home_color} !important">${gameData.home_team}</p>
+                    <br>
+                </div>
+            `;
+        }
+
+        cardsHTML = cardsHTML + `
+        <div class="swiper-slide">  
+            <div class="pd4">
+                ${parlayCard}
+            </div>
+        </div>
+            <br>
+            <br>
+        `;
+    }
+            // Initialize Swiper
+        const swiper = new Swiper('#cards-wrapper', {
+            slidesPerView: 'auto',
+            freeMode: true,
+            spaceBetween: 16,
+            touchRatio: 1,
+            scrollbar: {
+                el: '.swiper-scrollbar',
+                hide: false,
+            },
+        });
+
+
+    var cards = document.getElementById("cards");
+    cards.innerHTML = cards.innerHTML + cardsHTML;
+    console.log("winners", winners)
+    console.log("losers", losers)
+}
+
     </script>
 </body>
 
