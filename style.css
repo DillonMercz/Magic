@@ -1074,6 +1074,27 @@ body {
     margin-left: 0.5em;
 }
 
+.bar1::-webkit-progress-bar {
+    padding: 0.3em;
+    border-radius: calc(1.4em / 2);
+    background: #1e1e1e;
+}
+
+.bar1::-webkit-progress-value {
+    background: #03fcc2;
+    box-shadow: 0 0 0.6em #0dfcc4, 0 0 0.8em #17fcc7;
+    border-radius: calc(1.4em/2);
+}
+
+.bar__value {
+    color: #fc0349;
+    font-size: 1.2em;
+    line-height: 1.4em;
+    letter-spacing: 1px;
+    text-shadow: 0 0 0.3em #f70348, 0 0 0.6em #de0340;
+    margin-left: 0.5em;
+}
+
 .modal {
     display: none;
     position: fixed;
