@@ -1,16 +1,10 @@
+<head>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" src="style.css">
+<link rel="stylesheet" src="./style.css">
+</head>
 <style>
     html, body * { box-sizing: border-box; font-family: 'Open Sans', sans-serif; }
 
-body {
-  background:
-    linear-gradient(
-    rgba(246,247,249,0.8),
-    rgba(246,247,249,0.8)),
-    url(https://dl.dropboxusercontent.com/u/22006283/preview/codepen/sky-clouds-cloudy-mountain.jpg) no-repeat center center fixed;
-  background-size: cover;
-}
 
 .container {
   width: 100%;
@@ -414,14 +408,14 @@ a.btn-signup:hover, a.btn-signin:hover {
     linear-gradient(
     rgba(35,43,85,0.75),
     rgba(35,43,85,0.95)),
-    url(https://dl.dropboxusercontent.com/u/22006283/preview/codepen/landscape-nature-man-person.jpeg);
+    url(https://i.imgur.com/zrbb0gm.jpeg);
   background-size: cover;
   opacity: 0;
   transition: all 1.5s ease 0.55s;
 }
 
 .cover-photo-down {
-  top: -575px;
+  top: -600px;
   opacity: 1;
 }
 
@@ -569,9 +563,8 @@ a.btn-goback:hover {
         </div>
         <div>
             <div class="cover-photo"></div>
-            <div class="profile-photo"></div>
-            <h1 class="welcome">Welcome, Chris</h1>
-            <a class="btn-goback" value="Refresh" onClick="history.go()">Go back</a>
+            <h1 class="welcome">Welcome to<br>the money printer.</h1>
+            <a class="btn-goback" onClick="closeModal()">Let's Get it.</a>
         </div>
     </div>
     <a id="refresh" value="Refresh" onClick="history.go()">
@@ -609,15 +602,4 @@ $(function() {
     });
 });
 
-$(function() {
-    $(".btn-signin").click(function() {
-        $(".btn-animate").toggleClass("btn-animate-grow");
-        $(".welcome").toggleClass("welcome-left");
-        $(".cover-photo").toggleClass("cover-photo-down");
-        $(".frame").toggleClass("frame-short");
-        $(".profile-photo").toggleClass("profile-photo-down");
-        $(".btn-goback").toggleClass("btn-goback-up");
-        $(".forgot").toggleClass("forgot-fade");
-    });
-});
 </script>
