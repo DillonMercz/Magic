@@ -436,8 +436,8 @@
             </center>
             <br>
         </div>
-    <div class="card-body frame ">
-        <div class="card col-4 neon-block">
+        <div class="card-body frame ">
+            <div class="card col-4 neon-block">
                 <span class="rainbow"></span>
                 <div class="nav">
                     <center>
@@ -449,7 +449,9 @@
                 </div>
                 <div ng-app ng-init="checked = true">
                     <form class="form-signin" action="" method="post" name="form">
-                        <center><p style="background-color:red;color:white;padding:15px;display:none" id="login-error"></p></center>
+                        <center>
+                            <p style="background-color:red;color:white;padding:15px;display:none" id="login-error"></p>
+                        </center>
                         <label for="username">Email</label>
                         <input class="form-styling" type="text" name="email" id="loginEmail" placeholder="" />
                         <label for="password">Password</label>
@@ -497,7 +499,7 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
     </div>
     <div id="paymentModal" class="modal login-box text-center" style="background:black">
         <div class="" style="display:block">
@@ -532,22 +534,20 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
-<script>
-$(function() {
-    $(".btn").click(function() {
-        $(".form-signin").toggleClass("form-signin-left");
-        $(".form-signup").toggleClass("form-signup-left");
-        $(".frame").toggleClass("frame-long");
-        $(".signup-inactive").toggleClass("signup-active");
-        $(".signin-active").toggleClass("signin-inactive");
-        $(".forgot").toggleClass("forgot-left");
-        $(this).removeClass("idle").addClass("active");
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+    <script>
+    $(function() {
+        $(".btn").click(function() {
+            $(".form-signin").toggleClass("form-signin-left");
+            $(".form-signup").toggleClass("form-signup-left");
+            $(".frame").toggleClass("frame-long");
+            $(".signup-inactive").toggleClass("signup-active");
+            $(".signin-active").toggleClass("signin-inactive");
+            $(".forgot").toggleClass("forgot-left");
+            $(this).removeClass("idle").addClass("active");
+        });
     });
-});
-
-
-</script>
+    </script>
     <script>
     // Functions to open and close the modal
     function openPaymentModal() {
@@ -739,7 +739,7 @@ $(function() {
             .catch(error => {
                 // Handle login error
                 document.getElementById("login-error").style.display = "block"
-                if(error.message == '{"error":{"code":400,"message":"INVALID_LOGIN_CREDENTIALS","errors":[{"message":"INVALID_LOGIN_CREDENTIALS","domain":"global","reason":"invalid"}]}}'){
+                if (error.message == '{"error":{"code":400,"message":"INVALID_LOGIN_CREDENTIALS","errors":[{"message":"INVALID_LOGIN_CREDENTIALS","domain":"global","reason":"invalid"}]}}') {
                     error.message = "Invalid Password you can reset below"
                 }
                 console.error('Login error:', error.message);
@@ -777,6 +777,24 @@ $(function() {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 document.write(errorMessage);
+            });
+    }
+
+
+    function passwordReset() {
+        var email = document.getElementByID("loginEmail").value
+        firebase.auth().sendPasswordResetEmail(email)
+            .then(() => {
+                document.getElementById("login-error").style.display = "block"
+                document.getElementById("login-error").innerText = `Password Email Sent to: ${email}`
+                // ..
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                document.getElementById("login-error").style.display = "block"
+                document.getElementById("login-error").innerText = error.message
+                // ..
             });
     }
 
@@ -1127,23 +1145,23 @@ $(function() {
         //console.log("losers", losers)
     }
     </script>
-<div id="paypal-button-container-P-0CN54331KJ228840MMVZAEFY"></div>
-<script src="https://www.paypal.com/sdk/js?client-id=AZNQnJmY8fANcRCkafTHqP41ZhXTYVjO4-jkWADiA4rVkSUo4y7XNPPJct5m-yOyDc-gsv6itgqVwZY1&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
-<script>
-  paypal.Buttons({
-      style: {
-          shape: 'rect',
-          color: 'gold',
-          layout: 'vertical',
-          label: 'subscribe'
-      },
-      createSubscription: function(data, actions) {
-        return actions.subscription.create({
-          /* Creates the subscription */
-          plan_id: 'P-0CN54331KJ228840MMVZAEFY'
-        });
-      },
-     onApprove: function(data, actions) {
+    <div id="paypal-button-container-P-0CN54331KJ228840MMVZAEFY"></div>
+    <script src="https://www.paypal.com/sdk/js?client-id=AZNQnJmY8fANcRCkafTHqP41ZhXTYVjO4-jkWADiA4rVkSUo4y7XNPPJct5m-yOyDc-gsv6itgqVwZY1&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+    <script>
+    paypal.Buttons({
+        style: {
+            shape: 'rect',
+            color: 'gold',
+            layout: 'vertical',
+            label: 'subscribe'
+        },
+        createSubscription: function(data, actions) {
+            return actions.subscription.create({
+                /* Creates the subscription */
+                plan_id: 'P-0CN54331KJ228840MMVZAEFY'
+            });
+        },
+        onApprove: function(data, actions) {
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
                     // User is signed in, fetch the document
@@ -1164,9 +1182,8 @@ $(function() {
                 }
             })
         }
-  }).render('#paypal-button-container-P-0CN54331KJ228840MMVZAEFY'); // Renders the PayPal button
-</script>
+    }).render('#paypal-button-container-P-0CN54331KJ228840MMVZAEFY'); // Renders the PayPal button
+    </script>
 </body>
-
 
 </html>
