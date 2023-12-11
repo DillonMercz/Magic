@@ -1370,7 +1370,6 @@ body {
     font-weight: 300;
     padding-left: 37px;
     padding-right: 37px;
-    padding-top: 55px;
     transition: opacity .5s ease, transform .5s ease;
 }
 .form-signup {
@@ -1483,7 +1482,6 @@ li {
   font-weight: 300;
   padding-left: 37px;
   padding-right: 37px;
-  padding-top: 55px;
   transition: opacity .5s ease, transform .5s ease;
 }
 
@@ -1499,7 +1497,6 @@ li {
   font-weight: 300;
   padding-left: 37px;
   padding-right: 37px;
-  padding-top: 55px;
   position: relative;
   top: -375px;
   left: 400px;

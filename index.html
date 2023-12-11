@@ -449,6 +449,7 @@
                 </div>
                 <div ng-app ng-init="checked = true">
                     <form class="form-signin" action="" method="post" name="form">
+                        <center><p style="background-color:red;color:white;padding:15px;display:none" id="login-error"></p></center>
                         <label for="username">Email</label>
                         <input class="form-styling" type="text" name="email" id="loginEmail" placeholder="" />
                         <label for="password">Password</label>
@@ -737,7 +738,12 @@ $(function() {
             })
             .catch(error => {
                 // Handle login error
+                document.getElementById("login-error").style.display = "block"
+                if(error.message == '{"error":{"code":400,"message":"INVALID_LOGIN_CREDENTIALS","errors":[{"message":"INVALID_LOGIN_CREDENTIALS","domain":"global","reason":"invalid"}]}}'){
+                    error.message = "Invalid Password you can reset below"
+                }
                 console.error('Login error:', error.message);
+                document.getElementById("login-error").innerText = error.message
             });
     }
 
