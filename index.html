@@ -782,7 +782,7 @@
 
 
     function passwordReset() {
-        var email = document.getElementByID("loginEmail").value
+        var email = document.getElementById("loginEmail").value
         firebase.auth().sendPasswordResetEmail(email)
             .then(() => {
                 document.getElementById("login-error").style.display = "block"
