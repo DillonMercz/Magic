@@ -475,7 +475,7 @@
                         <input class="form-styling" type="password" id="signupPassword" name="password" placeholder="" />
                         <input type="checkbox" id="checkbox" />
                         <label for="checkbox"><span class="ui"></span>Keep me signed in</label>
-                        <a ng-click="checked = !checked" class="btn-signup">
+                        <a ng-click="checked = !checked" class="btn-signup" onclick="signup()">
                             <span></span>
                             <span></span>
                             <span></span>
@@ -549,6 +549,20 @@
     });
     </script>
     <script>
+        function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+try{
+    referral = getParameterByName("referral")
+    //console.log(referral)
+}catch{
+    console.log("No referral found")
+}
     // Functions to open and close the modal
     function openPaymentModal() {
         document.getElementById('paymentModal').style.display = 'block';
@@ -605,6 +619,7 @@
     const pastData = [];
 
     function processDate(i) {
+        console.log(referral)
         var activityColoumn = document.getElementById("activity")
         const previousDate = new Date(currentDate);
         previousDate.setDate(previousDate.getDate() - i);
@@ -761,7 +776,8 @@
                 // Add user document to Firestore
                 firebase.firestore().collection('users').doc(user.email).set({
                         email: user.email,
-                        status: 'Commoner'
+                        status: 'Commoner',
+                        referral: `${referral}`
                     })
                     .then(() => {
                         console.log('User document added successfully.');
