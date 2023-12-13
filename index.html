@@ -396,9 +396,17 @@
             <div class="card-body neon-cards">
                 <div class="card">
                     <center>
+                        <h3>JOIN THE DISCORD</h3>
+                    </center>
+                    <center><h4><a href="https://discord.gg/A5n9PXG3hk">Tap into a community of winners.</a></h4></center>
+                    <hr>
+                </div>
+                <hr>
+                <div class="card">
+                    <center>
                         <h3>FLIFF PROMO</h3>
                     </center>
-                    <h4>Use code: UYLRU</h4>
+                    <center><h4>Use code: UYLRU</h4></center>
                     <hr>
                     <center>
                         <h4><a href="https://get.fliffapp.com/QlC3/6okd8p2v">Use This Link</a></h4>
@@ -518,20 +526,77 @@
             </center>
         </div>
     </div>
-        <div id="announcementModal" class="modal login-box text-center" style="background:black">
+    <div id="announcementModal" class="modal login-box text-center" style="background:black">
         <div class="" style="display:block">
-            <center>
-                <h3>Unlock Premium</h3>
-            </center><br>
-            <center>
-                <p>For $50/month you unlock more wins and less losses, <br> guranteed through our state-of-the art AI. Money back if you lose more than you win.</p>
-            </center>
+            <section class="section slider-section">
+                <div class="container slider-column">
+                    <div class="swiper swiper-slider">
+                        <div class="swiper-wrapper">
+                            <img class="swiper-slide" src="https://source.unsplash.com/1920x1280/?animal" alt="Swiper">
+                            <img class="swiper-slide" src="https://source.unsplash.com/1920x1280/?nature" alt="Swiper">
+                            <img class="swiper-slide" src="https://source.unsplash.com/1920x1280/?people" alt="Swiper">
+                            <img class="swiper-slide" src="https://source.unsplash.com/1920x1280/?flower" alt="Swiper">
+                            <img class="swiper-slide" src="https://source.unsplash.com/1920x1280/?travel" alt="Swiper">
+                            <img class="swiper-slide" src="https://source.unsplash.com/1920x1280/?fruits" alt="Swiper">
+                        </div>
+                        <span class="swiper-pagination"></span>
+                        <span class="swiper-button-prev"></span>
+                        <span class="swiper-button-next"></span>
+                    </div>
+                </div>
+                <script>
+                const swiper = new Swiper(".swiper-slider", {
+                    // Optional parameters
+                    centeredSlides: true,
+                    slidesPerView: 1,
+                    grabCursor: true,
+                    freeMode: false,
+                    loop: true,
+                    mousewheel: false,
+                    keyboard: {
+                        enabled: true
+                    },
+
+                    // Enabled autoplay mode
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false
+                    },
+
+                    // If we need pagination
+                    pagination: {
+                        el: ".swiper-pagination",
+                        dynamicBullets: false,
+                        clickable: true
+                    },
+
+                    // If we need navigation
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev"
+                    },
+
+                    // Responsive breakpoints
+                    breakpoints: {
+                        640: {
+                            slidesPerView: 1.25,
+                            spaceBetween: 20
+                        },
+                        1024: {
+                            slidesPerView: 2,
+                            spaceBetween: 20
+                        }
+                    }
+                });
+                </script>
+            </section>
+            </main>
         </div>
         <br>
         <div class="" style="background:black;padding:40px">
             <center>
                 <div id="paypal-button-container-P-0CN54331KJ228840MMVZAEFY"></div>
-                <button class="btn btn-danger" onclick="closePaymentModal()">I'd Rather Be Broke</button>
+                <button class="btn btn-danger" onclick="closeAnnouncementModal()">I'd Rather Be Broke</button>
             </center>
         </div>
     </div>
@@ -566,20 +631,20 @@
     });
     </script>
     <script>
-        function getParameterByName(name, url = window.location.href) {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
-try{
-    referral = getParameterByName("referral")
-    //console.log(referral)
-}catch{
-    console.log("No referral found")
-}
+    function getParameterByName(name, url = window.location.href) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+    try {
+        referral = getParameterByName("referral")
+        //console.log(referral)
+    } catch {
+        console.log("No referral found")
+    }
     // Functions to open and close the modal
     function openPaymentModal() {
         document.getElementById('paymentModal').style.display = 'block';
@@ -588,6 +653,15 @@ try{
     function closePaymentModal() {
         document.getElementById('paymentModal').style.display = 'none';
     }
+    // Functions to open and close the modal
+    function openAnnouncementModal() {
+        document.getElementById('announcementModal').style.display = 'block';
+    }
+
+    function closeAnnouncementModal() {
+        document.getElementById('announcementModal').style.display = 'none';
+    }
+    //openAnnouncementModal()
     </script>
     <script>
     //alert('hello there')
@@ -650,7 +724,7 @@ try{
         fetchData(formattedDate1, (date, data) => {
             if (data) {
                 for (var i in data) {
-                    console.log(data[i])
+                    //console.log(data[i])
                     var activityCard = activityColoumn.innerHTML += `
             <div class="pd4">
                 <div class="card-body">
@@ -849,7 +923,7 @@ try{
         scoresContainer.innerHTML = '';
         for (var i in data.scoreboard.games) {
             const game = data.scoreboard.games[i];
-            console.log(game)
+            //console.log(game)
             //console.log(game)
             var winText
             var loseText
@@ -924,10 +998,10 @@ try{
                 var stats = document.getElementById(`${game.homeTeam.teamCity} ${game.homeTeam.teamName}-stats`);
                 var status = document.getElementById(`${game.homeTeam.teamCity} ${game.homeTeam.teamName}-status`);
                 var statsArray = stats.innerHTML.split(" ");
-                console.log(statsArray)
+                //console.log(statsArray)
                 var bet = statsArray[0];
                 var prediction = statsArray[2];
-                console.log(bet, prediction)
+                //console.log(bet, prediction)
 
                 // Assuming game.awayTeam.score and game.homeTeam.score are available
 
