@@ -1311,13 +1311,19 @@ body {
 
 /* Add media query for mobile */
 @media (max-width: 767px) {
+	.card-header{
+		background-color:#001a1a;
+	}
+	.card-body{
+		background-color:#001a1a
+	}
 
     .info-column,
     .activity-column {
         display: none;
         /* Hide the columns on mobile */
         right: 0px;
-        z-index: 1000;
+       	z-index: 1000;
         width: 90% !important;
     }
 

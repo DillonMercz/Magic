@@ -518,6 +518,23 @@
             </center>
         </div>
     </div>
+        <div id="announcementModal" class="modal login-box text-center" style="background:black">
+        <div class="" style="display:block">
+            <center>
+                <h3>Unlock Premium</h3>
+            </center><br>
+            <center>
+                <p>For $50/month you unlock more wins and less losses, <br> guranteed through our state-of-the art AI. Money back if you lose more than you win.</p>
+            </center>
+        </div>
+        <br>
+        <div class="" style="background:black;padding:40px">
+            <center>
+                <div id="paypal-button-container-P-0CN54331KJ228840MMVZAEFY"></div>
+                <button class="btn btn-danger" onclick="closePaymentModal()">I'd Rather Be Broke</button>
+            </center>
+        </div>
+    </div>
     <button class="show-info" onclick="toggleVisibility('info-column')"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
             <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
             <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" /></svg></button>
@@ -993,6 +1010,7 @@ try{
                             method: 'GET',
                             redirect: 'follow'
                         };
+                        //${formattedDate}
 
                         fetch(`https://cryptaverse.xyz/predictions/${formattedDate}_predictions.json`, requestOptions)
                             .then(response => response.text())
