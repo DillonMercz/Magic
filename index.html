@@ -394,7 +394,7 @@
                 </center>
             </div>
             <div class="card-body neon-cards">
-                <div class="card">
+                <div class="card" id="discord">
                     <center>
                         <h3>JOIN THE DISCORD</h3>
                     </center>
@@ -1077,8 +1077,10 @@
                             <button class="btn btn-primary" onclick="getPremium()">Get Premium</button>
                             </center>
                         `;
+                        document.getElementById("discord").style.display = "none"
                         aiContainer.appendChild(blurryElement);
                     } else if (status === "Apprentice") {
+                        document.getElementById("discord").style.display = "block"
 
                         var requestOptions = {
                             method: 'GET',
