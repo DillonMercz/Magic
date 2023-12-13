@@ -1088,7 +1088,7 @@
                         };
                         //${formattedDate}
 
-                        fetch(`https://cryptaverse.xyz/predictions/2023-12-12_predictions.json`, requestOptions)
+                        fetch(`https://cryptaverse.xyz/predictions/${formattedDate}_predictions.json`, requestOptions)
                             .then(response => response.text())
                             .then(result => buildPredictions(JSON.parse(result)))
                             .catch(error => console.log('error', error));
