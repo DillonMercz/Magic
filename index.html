@@ -337,46 +337,39 @@
                                         </div>
                                         <div class="card-body">
                                             <p>We are excited to announce breakthroughs in other areas of sports betting. Currently we only support the NBA, however NFL and NHL are in early testing and are expected to come very soon. <br><br>Enhance your experience with predictions for additional sports. More wins, more fun! <br><br>#SportsProphetAI #SportsPredictions</p>
-
                                             <!-- Bootstrap Table for Quarterly Scores -->
                                         </div>
                                     </div>
                                 </div>
-                                  <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4" style="margin-right: 16px;">
-
+                                <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4" style="margin-right: 16px;">
                                     <div class="pd4">
                                         <div class="card-header">
                                             <h2>All New Features Arriving</h2>
                                         </div>
                                         <div class="card-body">
                                             <p style="line-height: 20px;">- Community voting on picks.<br>- Predicted Player Props<br>- Community Chat<br>- Live Betting Updates<br>- Live Performance graphs for both players as well as teams.<br>- Financial Tracking<br>- Automated upload of our AI picks and parlays to your sportsbook of choice.</p>
-
                                             <!-- Bootstrap Table for Quarterly Scores -->
                                         </div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4" style="margin-right: 16px;">
-
                                     <div class="pd4">
                                         <div class="card-header">
                                             <h2>Better Organization</h2>
                                         </div>
                                         <div class="card-body">
                                             <p>We are aware that a decent amount of users find the dashboard to be cluttered and hard to read, we are actively working to fix that, thank you for your patience.</p>
-
                                             <!-- Bootstrap Table for Quarterly Scores -->
                                         </div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4" style="margin-right: 16px;">
-
                                     <div class="pd4">
                                         <div class="card-header">
                                             <h2>Contact Information</h2>
                                         </div>
                                         <div class="card-body">
                                             <p>If at any point you are having trouble or need answers to questions, feel free to reach out to us at (813)-541-9900</p>
-
                                             <!-- Bootstrap Table for Quarterly Scores -->
                                         </div>
                                     </div>
@@ -389,7 +382,6 @@
                 </div>
             </div>
         </div>
-
         <br>
         <!-- Live Scores Section -->
         <section class="card mb-4 neon-block">
@@ -849,6 +841,8 @@
     };
 
     firebase.initializeApp(firebaseConfig);
+    // Initialize Analytics
+    const analytics = firebase.analytics();
 
     // Check authentication state
     firebase.auth().onAuthStateChanged(user => {
