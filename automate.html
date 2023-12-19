@@ -1,0 +1,86 @@
+<script>
+var sportsbook
+const currentDate = new Date();
+const options = { timeZone: 'America/New_York' };
+const [month, day, year] = currentDate.toLocaleDateString('en-US', options)
+    .split('/')
+    .map((part) => part.padStart(2, '0'));
+const formattedDate = `${year}-${month}-${day}`;
+var myHeaders = new Headers();
+myHeaders.append("Cookie", "1P_JAR=2023-11-20-20; NID=511=hoSB2PZNS71DmRMV4Elj78LSKwfgP-itj4mkhJykwXVy8Jfq0IR-MP3KdDefEZ0LYd7O2PFBBY9ErjaXmeBr3-3wtIpae7oyE4Ty45F18L-GzDl3gI5WWl0KHPXioQOgTJ2TjjAgMgKT_nXN0BN-0kBm4fgKEW-JWoVPWgBrCdc");
+
+var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+};
+
+fetch("https://script.google.com/macros/s/AKfycbzoo_8eAyGHcZGun9Ty-14iLnm7hPmZa-JmbtAwt14Tcq7Rew1Vx1hCgf-Z923LpdXP/exec", requestOptions)
+    .then(response => response.text())
+    .then(result => findParlayData(result))
+    .catch(error => console.log('error', error));
+
+
+function findParlayData(sportsbook1) {
+    sportsbook = JSON.parse(sportsbook1)
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+    //${formattedDate}
+
+    fetch(`https://cryptaverse.xyz/predictions/${formattedDate}_predictions.json`, requestOptions)
+        .then(response => response.text())
+        .then(result => buildParlays(JSON.parse(result)))
+        .catch(error => console.log('error', error));
+
+}
+
+function buildParlays(data) {
+    //console.log(sportsbook)
+    const numGames = data.length;
+    const parlays = [];
+
+    // Iterate through games for the first leg
+    for (let i = 0; i < numGames - 2; i++) {
+        // Iterate through games for the second leg
+        for (let j = i + 1; j < numGames - 1; j++) {
+            // Iterate through games for the third leg
+            for (let k = j + 1; k < numGames; k++) {
+                // Build the parlay array and push it to the parlays array
+                parlays.push([data[i], data[j], data[k]]);
+            }
+        }
+    }
+
+    //console.log(parlays);
+    uploadParlays(parlays)
+}
+
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+}
+
+
+
+function uploadParlays(parlays) {
+  console.log((sportsbook.x_slots))
+var x_slots = (sportsbook.x_slots);
+
+for (var i in x_slots) {
+  console.log(x_slots[i]);
+}
+    console.log(parlays)
+
+    for (parlayIndex in parlays) {
+        var parlay = parlays[parlayIndex];
+        for (gameIndex in parlay) {
+            var gameData = parlay[gameIndex];
+            var total1 = gameData.total
+            //console.log(`${gameData.away_team} vs ${gameData.home_team}`);
+            //console.log(getKeyByValue(sportsbook, `${gameData.away_team} vs ${gameData.home_team}`));
+        }
+    }
+}
+
+</script>
