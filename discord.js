@@ -3,7 +3,7 @@ const { Client, GatewayIntentBits, EmbedBuilder, MessageActionRow, MessageButton
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
-const TOKEN = 'MTE4NTY2ODg0OTA4NTk5MzA0MA.GJ7_AA.Fjlw4GO3rng8NUygNCInF2sPSmGPJH7jylDJto';
+const TOKEN = 'MTE4NTY2ODg0OTA4NTk5MzA0MA.GzqNUz.gxVMVnZmNKmHj61zMG1UhkYFPJUhCgOkswErkQ';
 const GUILD_ID = '1177360730543095939';
 const CHANNEL_ID = '1185668435636670585';
 const API_URL = 'https://cdn.nba.com/static/json/liveData/scoreboard/todaysScoreboard_00.json';
