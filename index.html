@@ -552,8 +552,8 @@
                         <input class="form-styling" type="text" id="signupEmail" name="email" placeholder="" />
                         <label for="password">Password</label>
                         <input class="form-styling" type="password" id="signupPassword" name="password" placeholder="" />
-                        <input type="checkbox" id="checkbox" />
-                        <label for="checkbox"><span class="ui"></span>Keep me signed in</label>
+                       
+                    
                         <a ng-click="checked = !checked" class="btn-signup" onclick="signup()">
                             <span></span>
                             <span></span>
@@ -664,6 +664,12 @@
             </main>
         </div>
         <br>
+        <div class="" style="background:black;padding:40px">
+            <center>
+                <div id="paypal-button-container-P-0CN54331KJ228840MMVZAEFY"></div>
+                <button class="btn btn-danger" onclick="closeAnnouncementModal()">I'd Rather Be Broke</button>
+            </center>
+        </div>
     </div>
     <button class="show-info" onclick="toggleVisibility('info-column')"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
             <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -1287,7 +1293,7 @@
                 parlayCard = parlayCard + `
                 <div class="card-body">
                     <h3 id="${gameData.home_team}-stats">${gameData.under_over} ${total1}</h3>
-                    <p style="display:inline; color:${gameData.expected_value_colors.away_color} !important">${gameData.away_team}</p> <p style="display:inline;">vs</p> <p style="display:inline; color:${gameData.expected_value_colors.home_color} !important">${gameData.home_team}</p>
+                    <p style="display:inline; color:${gameData.expected_value_colors.home_color} !important">${gameData.away_team}</p> <p style="display:inline;">vs</p> <p style="display:inline; color:${gameData.expected_value_colors.away_color} !important">${gameData.home_team}</p>
                     <br>
                 </div>
             `;
