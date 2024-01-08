@@ -800,7 +800,7 @@
             <div class="pd4">
                 <div class="card-body">
                 <h3 id="${data[i].home_team}-stats">${data[i].under_over}  ${data[i].total}</h3>
-                    <p style="display:inline; color:${data[i].expected_value_colors.away_color} !important">${data[i].away_team}</p> <p style="display:inline;">vs </p> <p style="display:inline; color:${data[i].expected_value_colors.home_color} !important">${data[i].home_team}</p>
+                    <p style="display:inline; color:${data[i].expected_value_colors.home_color} !important">${data[i].away_team}</p> <p style="display:inline;">vs </p> <p style="display:inline; color:${data[i].expected_value_colors.away_color} !important">${data[i].home_team}</p>
                     <br>
                     <div class="neon-bar">
                       <progress id="${data[i].home_team}-progress" class='bar1' value='0' max='400'></progress>
@@ -1201,7 +1201,7 @@
             <div class="pd4">
                 <div class="card-body">
                 <h3 id="${predictions[i].home_team}-stats">${game.under_over}  ${game.total}</h3>
-                    <p style="display:inline; color:${game.expected_value_colors.away_color} !important">${game.away_team}</p> <p style="display:inline;">vs </p> <p style="display:inline; color:${game.expected_value_colors.home_color} !important">${game.home_team}</p>
+                    <p style="display:inline; color:${game.expected_value_colors.home_color} !important">${game.away_team}</p> <p style="display:inline;">vs </p> <p style="display:inline; color:${game.expected_value_colors.away_color} !important">${game.home_team}</p>
                     <br>
                     <div class="neon-bar">
                       <progress id="${predictions[i].home_team}-progress" class='bar' value='0' max='400'></progress>
